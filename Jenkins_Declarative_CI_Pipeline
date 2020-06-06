@@ -8,7 +8,7 @@ steps{
 }
 stage('build'){
 steps{
-    bat label: '', script: 'mvn package'
+    bat "mvn package"
 	}
 }
 stage('archive'){
