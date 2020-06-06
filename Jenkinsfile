@@ -9,19 +9,19 @@ pipeline {
 
     stage('checkout') {
       steps {
-        git(url: '\'https://github.com/bnayak005/spring-petclinic.git\'', branch: 'master')
+        echo 'echo \'checking out the code!!!\''
       }
     }
 
-    stage('archive') {
+    stage('build') {
       steps {
-        archiveArtifacts 'target/*.jar'
+        echo 'echo \'building out the code!!!\''
       }
     }
 
-    stage('publish junit result') {
+    stage('publish') {
       steps {
-        junit 'target/surefire-reports/*.xml'
+        echo 'echo \'publishing the result!!!\''
       }
     }
 
