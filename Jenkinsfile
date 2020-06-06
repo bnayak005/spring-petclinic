@@ -3,7 +3,7 @@ pipeline {
   stages {
     stage('environment setup') {
       steps {
-        bat 'env.PATH = "D:/apache-maven-3.5.0-bin/apache-maven-3.5.0/bin;C:\\\\Windows\\\\System32"'
+        load 'env.PATH = "D:/apache-maven-3.5.0-bin/apache-maven-3.5.0/bin;C:\\\\Windows\\\\System32"'
       }
     }
 
