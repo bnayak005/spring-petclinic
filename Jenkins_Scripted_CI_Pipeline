@@ -1,19 +1,16 @@
-node('master'){
-stage('checkout'){
+node {
+    stage('environment setup')
+    env.PATH = "D:/apache-maven-3.5.0-bin/apache-maven-3.5.0/bin;C:\\Windows\\System32"
+    stage('checkout') 
     git 'https://github.com/bnayak005/spring-petclinic.git'
-}
-stage('build'){
+    stage('build')
     bat label: '', script: 'mvn package'
-}
-stage('archive'){
+    stage('archive')
     archiveArtifacts 'target/*.jar'
-}
-stage('publish junit result'){
+    stage('publish junit result')
     junit 'target/surefire-reports/*.xml'
-}
-stage('notify'){
+    stage('notify')
     sendemail('Success')
-}
 }
 
 def sendemail(status){
