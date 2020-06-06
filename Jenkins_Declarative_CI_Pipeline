@@ -1,0 +1,33 @@
+pipeline{
+agent any
+stages{
+stage('checkout'){
+steps{
+    git 'https://github.com/bnayak005/spring-petclinic.git'
+	}
+}
+stage('build'){
+steps{
+    bat label: '', script: 'mvn package'
+	}
+}
+stage('archive'){
+steps{
+    archiveArtifacts 'target/*.jar'
+	}
+}
+stage('publish junit result'){
+steps{
+    junit 'target/surefire-reports/*.xml'
+	}
+}
+stage('notify'){
+steps{
+    sendemail('Success')
+	}
+}
+}
+}
+def sendemail(status){
+emailext body: 'Hey I am sending email', subject:"'about build' ${status}: Job ${env.JOB_NAME}", to: 'Bhubaneswari_Nayak1@epam.com'
+}
