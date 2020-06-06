@@ -1,9 +1,9 @@
 pipeline {
   agent any
   stages {
-    stage('environment setup') {
+    stage('Initialization') {
       steps {
-        load 'env.PATH = "D:/apache-maven-3.5.0-bin/apache-maven-3.5.0/bin;C:\\\\Windows\\\\System32"'
+        echo 'echo \'Execution started!!!\''
       }
     }
 
