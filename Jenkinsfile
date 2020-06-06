@@ -19,9 +19,32 @@ pipeline {
       }
     }
 
+    stage('Unit Test') {
+      parallel {
+        stage('Unit Test') {
+          steps {
+            echo 'echo \'It\'s Unit test!!!\''
+          }
+        }
+
+        stage('Api Test') {
+          steps {
+            echo 'echo \'It\'s Api test!!!\''
+          }
+        }
+
+        stage('Db Test') {
+          steps {
+            echo 'echo \'It\'s Db Test!!!\''
+          }
+        }
+
+      }
+    }
+
     stage('publish') {
       steps {
-        echo 'echo \'publishing the result!!!\''
+        echo 'echo \'publishing result!!!\''
       }
     }
 
