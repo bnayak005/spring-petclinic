@@ -1,30 +1,32 @@
 pipeline{
 agent any
 stages{
-stage('checkout'){
-steps{
-    echo 'checking out!!!'
+		stage('checkout'){
+			steps{
+				echo 'checking out!!!'
+				git 'https://github.com/bnayak005/spring-petclinic.git'
+			}
+		}
+		stage('build'){
+			steps{
+				echo 'building project!!!'
+				script{
+					env.PATH = "D:/apache-maven-3.5.0-bin/apache-maven-3.5.0/bin;C:\\Windows\\System32"
+				}
+				bat label: '', script: 'mvn package'
+			}
+		}
+		stage('archive'){
+			steps{
+				echo 'archiving jar!!!'
+				archiveArtifacts 'target/*.jar'
+			}
+		}
 	}
-}
-stage('build'){
-steps{
-    echo 'building project!!!'
+	post{
+		always{
+			echo 'publishing result!!!'
+			step([$class: 'JUnitResultArchiver', testResults: '**/target/surefire-reports/*.xml'])
+		}
 	}
-}
-stage('archive'){
-steps{
-    echo 'archiving jar!!!'
-	}
-}
-stage('publish junit result'){
-steps{
-    echo 'publishing result!!!'
-	}
-}
-stage('notify'){
-steps{
-    echo 'sending email!!!'
-	}
-}
-}
 }
