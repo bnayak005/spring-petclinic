@@ -3,31 +3,28 @@ agent any
 stages{
 stage('checkout'){
 steps{
-    git 'https://github.com/bnayak005/spring-petclinic.git'
+    echo 'checking out!!!'
 	}
 }
 stage('build'){
 steps{
-    bat "mvn package"
+    echo 'building project!!!'
 	}
 }
 stage('archive'){
 steps{
-    archiveArtifacts 'target/*.jar'
+    echo 'archiving jar!!!'
 	}
 }
 stage('publish junit result'){
 steps{
-    junit 'target/surefire-reports/*.xml'
+    echo 'publishing result!!!'
 	}
 }
 stage('notify'){
 steps{
-    sendemail('Success')
+    echo 'sending email!!!'
 	}
 }
 }
-}
-def sendemail(status){
-emailext body: 'Hey I am sending email', subject:"'about build' ${status}: Job ${env.JOB_NAME}", to: 'Bhubaneswari_Nayak1@epam.com'
 }
